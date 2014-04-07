@@ -1,7 +1,9 @@
 #!/bin/env node
 //  OpenShift sample Node application
-var express = require('express');
-var fs      = require('fs');
+var express     = require('express');
+var fs          = require('fs');
+var hbs         = require('hbs');
+var ThingEngine = require('./thingEngine');
 
 
 /**
@@ -104,6 +106,15 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
+
+        self.routes['/thing/:id'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.render("thing");
+        };
+
+        self.routes['/status'] = function(req, res) {
+            res.render("status", {statusString: "Working OK"});
+        };
     };
 
 
@@ -114,6 +125,9 @@ var SampleApp = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express.createServer();
+
+        self.app.set('view engine', 'html');
+        self.app.engine('html', hbs.__express);
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
