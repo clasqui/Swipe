@@ -1,3 +1,6 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+The Swipe App
+=============
 
-https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-nodejs/README.md
+[![Build Status](https://travis-ci.org/hulehule20/Swipe.svg?branch=master)](https://travis-ci.org/hulehule20/Swipe)
+
+This app will let you send links and pictures from your computer to your mobile phone and viceversa in an easy and fast way.  It's open source because it's one of my first projects and some collaboration is always welcome.
