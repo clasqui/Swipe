@@ -8,6 +8,6 @@ services:
   - mongodb
 deploy:
   provider: openshift
-  user: "hulehule20"
+  user: "hulehule20@gmail.com"
   password: "Marc112009" # can be encrypted
   domain: "hulehule20"
