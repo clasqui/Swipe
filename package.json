@@ -30,7 +30,8 @@
     "express": "3.5.1",
     "hjs": "*",
     "less-middleware": "~0.1.15",
-    "underscore": "1.6.0"
+    "underscore": "1.6.0",
+    "jasmine-node": "*"
   },
   "devDependencies": {},
   "bundleDependencies": [],
