@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Stop sending emails yourself: Try Swipe</h1>
+    <p>You must login to continue:</p>
+    <form action="/login" method="post">
+    	Email: <input name="email" type="text" /><br>
+    	Password: <input name="password" type="password" /><br>
+    	<input type="submit" value="Log In" />
+    </form>
+  </body>
+</html>

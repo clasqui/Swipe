@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./controllers');
 var user = require('./controllers/user');
 var Index = require('./controllers/index');
+var Login = require('./controllers/login');
 var http = require('http');
 var path = require('path');
 var config = require('./config')();
@@ -46,6 +47,10 @@ MongoClient.connect(config.mongodb, function(err, db){
 		app.all('/', attachDB, function(req, res, next){
 			Index.run(req, res, next);
 		});
+
+		app.post('/login', attachDB, function(req, res, next){
+			Login.run(req, res, next);
+		})
 		
 		app.get('/users', user.list);
 

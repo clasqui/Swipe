@@ -33,13 +33,15 @@
     "underscore": "1.6.0",
     "jasmine-node": "1.14.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.2"
+    },
   "bundleDependencies": [],
 
   "private": true,
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jasmine-node ./tests --forceexit"
+    "test": "jasmine-node ./tests --forceexit --verbose"
   }
 }
