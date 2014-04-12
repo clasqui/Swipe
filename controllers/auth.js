@@ -1,7 +1,7 @@
 module.exports = {
 
 
-	authorize: function(req) {
+	check: function(req) {
     return (
         req.session && 
         req.session.swipe && 

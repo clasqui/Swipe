@@ -6,23 +6,15 @@
 var BaseController = require('./Base');
 var View = require('../views/Base');
 var ObjectID = require('mongodb').ObjectID;
+var Auth = require('./auth');
 
 
 module.exports = BaseController.extend({
 	name: "Index",
 
 
-	authorize: function(req) {
-    return (
-        req.session && 
-        req.session.swipe && 
-        req.session.swipe === true
-    );
-
-  	},
-
 	run: function(req, res, next){
-		if (this.authorize(req)){
+		if (Auth.check(req)){
 
 
 		req.db.collection('users', function(err, collection){

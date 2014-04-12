@@ -5,19 +5,17 @@ describe("Authorization", function(){
 	it("should grant access", function(next) {
 
 		var request  = {
-        	method: 'GET',
-       		url: '/',
-        	params: {},
         	session: {
         		swipe: true
         	}
     	};
 
 
-		var value = Auth.authorize(request);
+		var value = Auth.check(request);
 
 		expect(request.session.swipe).toBeDefined();
 		expect(value).toBe(true);
+		next();
 
 	});
 
@@ -25,17 +23,15 @@ describe("Authorization", function(){
 	it("should deny access", function(next) {
 		
 		var request  = {
-        	method: 'GET',
-       		url: '/',
-        	params: {},
         	session: {
         		swipe: false
         	}
     	};
 
-		var value = Auth.authorize(request);
+		var value = Auth.check(request);
 		expect(request.session.swipe).toBeDefined();
 		expect(value).toBe(false);
+		next();
 
 	});
 
