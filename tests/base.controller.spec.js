@@ -1,3 +1,5 @@
+/*global describe, it, expect */
+
 var BaseController = require("../controllers/Base");
 describe("Base controller", function() {
     it("should have a method extend which returns a child instance", function(next) {

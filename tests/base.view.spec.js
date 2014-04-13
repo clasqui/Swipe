@@ -1,3 +1,5 @@
+/*global describe, it, expect */
+
 var View = require("../views/Base");
 describe("Base view", function() {
 	it("create and render new view", function(next) {

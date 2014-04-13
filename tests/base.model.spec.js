@@ -1,3 +1,5 @@
+/*global describe, it, expect */
+
 var Model = require("../models/Base"),
 	dbMockup = {};
 describe("Models", function() {

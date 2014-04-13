@@ -1,3 +1,5 @@
+/*global describe, it, expect */
+
 describe("Configuration setup", function() {
 	it("should load local configurations", function(next) {
 		var config = require('../config')('local');

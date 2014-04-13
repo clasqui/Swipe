@@ -1,3 +1,5 @@
+/*global describe, it, expect */
+
 describe("MongoDB", function() {
 	it("is there a server running", function(next) {
 		var MongoClient = require('mongodb').MongoClient;

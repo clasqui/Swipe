@@ -1,3 +1,5 @@
+/*global describe, it, expect */
+
 var Auth = require('../controllers/auth');
 
 describe("Authorization", function(){
@@ -5,10 +7,10 @@ describe("Authorization", function(){
 	it("should grant access", function(next) {
 
 		var request  = {
-        	session: {
-        		swipe: true
-        	}
-    	};
+			session: {
+				swipe: true
+			}
+		};
 
 
 		var value = Auth.check(request);
@@ -23,10 +25,10 @@ describe("Authorization", function(){
 	it("should deny access", function(next) {
 		
 		var request  = {
-        	session: {
-        		swipe: false
-        	}
-    	};
+			session: {
+				swipe: false
+			}
+		};
 
 		var value = Auth.check(request);
 		expect(request.session.swipe).toBeDefined();
