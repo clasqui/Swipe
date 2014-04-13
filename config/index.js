@@ -2,18 +2,21 @@ var config = {
 	local: {
 		mode: 'local',
 		port: 3000,
+		ip: '127.0.0.1',
 		mongodb: 'mongodb://127.0.0.1:27017/swipe'
 	},
 
 	staging: {
 		mode: 'staging',
 		port: 4000,
+		ip: '127.0.0.1',
 		mongodb: 'mongodb://127.0.0.1:27017/swipe'
 	},
 
 	production: {
 		mode: 'production',
-		port: process.env.OPENSHIFT_NODEJS_PORT || 8080,
+		port: process.env.OPENSHIFT_NODEJS_PORT,
+		ip: process.env.OPENSHIFT_NODEJS_IP,
 		mongodb: process.env.OPENSHIFT_MONGODB_DB_URL+'/swipe'
 	}
 }

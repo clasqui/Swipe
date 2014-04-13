@@ -1,3 +1,4 @@
+#!/bin/env node
 
 /**
  * Module dependencies.
@@ -54,8 +55,8 @@ MongoClient.connect(config.mongodb, function(err, db){
 		app.get('/users', user.list);
 
 
-		http.createServer(app).listen(config.port, function(){
-  			console.log('Express server listening on port ' + config.port);
+		http.createServer(app).listen(config.port, config.ip, function(){
+  			console.log('Express server listening at ' + config.ip + ":" + config.port);
 		});
 	}
 });
