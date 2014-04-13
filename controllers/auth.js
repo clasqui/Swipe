@@ -8,6 +8,5 @@ module.exports = {
         req.session.swipe === true
     );
 
-  	}
-
-}
+	}
+};

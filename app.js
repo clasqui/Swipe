@@ -4,7 +4,6 @@
  */
 
 var express = require('express');
-var routes = require('./controllers');
 var user = require('./controllers/user');
 var Index = require('./controllers/index');
 var Login = require('./controllers/login');
@@ -23,14 +22,14 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
+app.use(express.cookieParser("Hulehule20CookiesSecret"));
 app.use(express.session());
 app.use(app.router);
 app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if (config.mode == 'local') {
+if (config.mode === 'local') {
   app.use(express.errorHandler());
 }
 
@@ -53,8 +52,6 @@ MongoClient.connect(config.mongodb, function(err, db){
 		})
 		
 		app.get('/users', user.list);
-
-
 
 
 		http.createServer(app).listen(config.port, function(){

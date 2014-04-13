@@ -16,12 +16,11 @@ module.exports = BaseController.extend({
 				}else{
 					res.send('Bad user/pass');
 				}
+				next();
 			});
 
 		});
 
 	}
 
-
-
-})
+});

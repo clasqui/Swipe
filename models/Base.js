@@ -14,7 +14,9 @@ module.exports.prototype = {
 		this.db = db;
 	},
 	collection: function() {
-		if(this._collection) return this._collection;
-		return this._collection = this.db.collection('fastdelivery-content');
+		if(this._collection){
+			return this._collection;
+		}
+		return this._collection = this.db.collection('things');
 	}
 }
