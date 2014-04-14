@@ -28,7 +28,7 @@ module.exports = BaseController.extend({
 					process.exit(1);
 				}
 
-				req.session.save(function(err){
+				req.session.save(function(){
 
 				var v = new View(res, 'index');
 				v.render({
@@ -44,7 +44,7 @@ module.exports = BaseController.extend({
 
 			});
 
-		})
+		});
 
 		} else {
 			var v = new View(res, 'home-login');
@@ -56,4 +56,4 @@ module.exports = BaseController.extend({
 
 		 
 	}
-})
+});

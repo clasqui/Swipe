@@ -18,5 +18,5 @@ describe("Models", function() {
 		expect(model2.db).toBeDefined();
 		expect(model2.myCustomModelMethod).toBeDefined();
 		next();
-	})
+	});
 });

@@ -13,10 +13,10 @@ module.exports.prototype = {
 	setDB: function(db) {
 		this.db = db;
 	},
-	collection: function() {
+	collection: function(collection) {
 		if(this._collection){
 			return this._collection;
 		}
-		return this._collection = this.db.collection('things');
+		return this._collection = this.db.collection(collection);
 	}
-}
+};

@@ -10,7 +10,7 @@ describe("Base view", function() {
 				expect(template).toBe('template-file');
 				next();
 			}
-		}
+		};
 		var v = new View(responseMockup, 'template-file');
 		v.render({myProperty: 'value'});
 	});

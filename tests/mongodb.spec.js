@@ -16,17 +16,17 @@ describe("MongoDB", function() {
 			db.collection('users', function(err, collection){
 				expect(err).toBe(null);
 				expect(collection).toBeDefined();
-				doc = {
+				var doc = {
 					key: 'testing',
 					value1: 1320,
 					value2: ['Marc', 'Clasca', 'Ramirez']
-				}
+				};
 
-				collection.save(doc, function(err, record){
+				collection.save(doc, function(err){
 					expect(err).toBe(null);
 					next();
 				});
-			})
+			});
 
 		});
 	});
@@ -47,7 +47,7 @@ describe("MongoDB", function() {
 					next();
 
 				});
-			})
+			});
 
 		});
 	});
@@ -61,10 +61,10 @@ describe("MongoDB", function() {
 				
 
 				collection.remove({key:'testing'}, function(err, numberOfRemovedDocs) {
-        			expect(err).toBe(null);
-        			expect(numberOfRemovedDocs).toBe(1);
-        			next();
-      			});
+					expect(err).toBe(null);
+					expect(numberOfRemovedDocs).toBe(1);
+					next();
+				});
 
 			});
 

@@ -16,4 +16,4 @@ module.exports.prototype = {
             this.response.render(this.template, data);
         }
     }
-}
+};
