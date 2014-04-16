@@ -1,10 +1,10 @@
 {
-  "name": "swipe",
+  "name": "Swipe",
   "version": "1.0.0",
-  "description": "Send It Over node.js app",
+  "description": "Stop sending emails yourself.  Try Swipe, the fast and easy to use tool from transfearing little things from one devie to another.",
   "keywords": [
-    "OpenShift",
-    "Node.js",
+    "Swipe",
+    "devices",
     "application",
     "openshift"
   ],
@@ -18,12 +18,10 @@
     "type": "git",
     "url": "https://github.com/openshift/origin-server"
   },
-
   "engines": {
     "node": ">= 0.6.0",
     "npm": ">= 1.0.0"
   },
-
   "dependencies": {
     "mongodb": "1.3.23",
     "nodemon": "1.0.17",
@@ -31,13 +29,15 @@
     "hjs": "*",
     "less-middleware": "~0.1.15",
     "underscore": "1.6.0",
-    "jasmine-node": "1.14.3"
+    "jasmine-node": "1.14.3",
+    "redis": "0.10.1"
   },
   "devDependencies": {
-    "grunt": "~0.4.2"
-    },
+    "grunt": "^0.4.4",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-less": "^0.11.0"
+  },
   "bundleDependencies": [],
-
   "private": true,
   "main": "app.js",
   "scripts": {

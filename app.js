@@ -5,13 +5,16 @@
  */
 
 var express = require('express');
-var user = require('./controllers/user');
-var Index = require('./controllers/index');
-var Login = require('./controllers/login');
 var http = require('http');
 var path = require('path');
 var config = require('./config')();
 var MongoClient = require('mongodb').MongoClient;
+
+// Controllers
+var Index = require('./controllers/index');
+var Login = require('./controllers/login');
+var Logout = require('./controllers/logout');
+
 
 var app = express();
 
@@ -50,10 +53,11 @@ MongoClient.connect(config.mongodb, function(err, db){
 
 		app.post('/login', attachDB, function(req, res, next){
 			Login.run(req, res, next);
-		})
+		});
 		
-		app.get('/users', user.list);
-
+		app.all('/logout', function(req, res, next){
+			Logout.run(req, res, next);
+		})
 
 		http.createServer(app).listen(config.port, config.ip, function(){
   			console.log('Express server listening at ' + config.ip + ":" + config.port);

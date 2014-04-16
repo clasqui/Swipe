@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ title }}</title>
+    <title>Welcome to Swipe</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1>Stop sending emails yourself: Try Swipe</h1>
-    <p>You must login to continue:</p>
+    <p>Log In or Sign Up:</p>
     <form action="/login" method="post">
     	Email: <input name="email" type="text" /><br>
     	Password: <input name="password" type="password" /><br>

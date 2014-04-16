@@ -3,9 +3,48 @@
   <head>
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+
+    </style>
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <p>User email: {{ content }}</p>
+    <h1>{{title}}</h1>
+    <p>User email: {{email}}</p>
+    <p><a href="/logout">Logout</a></p>
+    <div class="things">
+    	<h2>Things</h2>
+
+    	{{#things}}
+    		<b>{{name}}</b>: {{data}}<br>
+    	{{/things}}
+
+
+    	{{^things}}
+    		You don't have things.<br>
+    	{{/things}}
+
+    	{{#max}}
+    		You have reached the limit of things.  Delete some to save new ones!
+    	{{/max}}
+    	{{^max}}
+   			<a href="#">Add thing</a>
+    	{{/max}}
+
+    </div>
+
+
+    <div>
+
+    	<h2>Devices</h2>
+
+    	{{#devices}}
+    		<b>{{name}}</b><br>
+    	{{/devices}}
+    	
+    	{{^devices}}
+    		You don't have devices registered.  Download the app and login to register a device.
+    	{{/devices}}
+
+    </div>
   </body>
 </html>

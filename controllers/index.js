@@ -7,6 +7,8 @@ var BaseController = require('./Base');
 var View = require('../views/Base');
 var ObjectID = require('mongodb').ObjectID;
 var Auth = require('./auth');
+var User = new (require('../models/UserModel'));
+var Thing = new (require('../models/ThingModel'));
 
 
 module.exports = BaseController.extend({
@@ -16,27 +18,35 @@ module.exports = BaseController.extend({
 	run: function(req, res, next){
 		if (Auth.check(req)){
 
+			cUser = req.session.user
+			User.setDB(req.db);
+			Thing.setDB(req.db);
 
-		req.db.collection('users', function(err, collection){
-			if (err){
-				console.log("there was an error:"+err);
-				process.exit(1);
-			}
-			collection.findOne({_id: ObjectID(req.session.user)}, function(err, document){
-				if (err){
-					console.log("there was an error:"+err);
-					process.exit(1);
-				}
+			User.getUser(cUser, function(err, document){
+				var email = document.email;
+				var devices = document.devices;
 
-				req.session.save(function(){
+				Thing.getFromUser(cUser, function(err, docs){
 
-				var v = new View(res, 'index');
-				v.render({
-	
-					title: 'Your Things in the Cloud',
-					content: document.email
+					if(Thing.howMany(cUser) >= 10) {
+						var max = true;
+					} else {
+						var max = false;
+					}
 
-				});
+					req.session.save(function(){
+
+						var v = new View(res, 'index');
+						v.render({
+							title: 'Your Things in the Cloud',
+							things: docs,
+							email: email,
+							devices: devices,
+							max: max
+
+						});
+
+					});
 
 
 				});
@@ -44,13 +54,11 @@ module.exports = BaseController.extend({
 
 			});
 
-		});
+
 
 		} else {
 			var v = new View(res, 'home-login');
-			v.render({
-				title: "Welcome to Swipe"
-			});
+			v.render();
 		}
 		
 

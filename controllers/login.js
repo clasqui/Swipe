@@ -4,7 +4,7 @@ module.exports = BaseController.extend({
 
 	name: 'Login',
 
-	run: function(req, res, next){
+	run: function(req, res){
 		var post = req.body;
 		req.db.collection('users', function(err, collection){
 
@@ -16,7 +16,6 @@ module.exports = BaseController.extend({
 				}else{
 					res.send('Bad user/pass');
 				}
-				next();
 			});
 
 		});
