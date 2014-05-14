@@ -1,0 +1,9 @@
+<html>
+<head>
+	<title>Resource Not Found</title>
+</head>
+<body>
+	We Could not found the resource you were looking for.  This might be caused by a misspelled URL or a broken link.<br>
+	Go Back to your <a href="/">home page</a> 
+</body>
+</html>

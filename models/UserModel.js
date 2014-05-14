@@ -1,19 +1,77 @@
 var Model = require("./Base"),
 	ObjectID = require('mongodb').ObjectID,
+    bcrypt = require('bcrypt-nodejs'),
     model = new Model();
 
 var UserModel = model.extend({
-	// Signs a new user up
-    signUp: function(email, password) {
+	
+    // Signs a new user up
+    // @callback: function(err, records)
+    signUp: function(email, password, callback) {
         /*
          * @TODO: Write method
-         *  - Check if email is taken, return boolean.
-         *  - Insert the new user to the DB
          *  - Send a verification email
-         *
          */
+
+         var self = this;
+         this.checkIfExists(email, function(exists){
+            console.log(email+"   "+password);
+            if(exists) {
+                var err = "User already exists";
+                return callback(err, null);
+            } else {
+                
+                var salt = bcrypt.genSaltSync(10);
+                var hashedPass = bcrypt.hashSync(password, salt);
+
+                var doc = {
+                    devices: [],
+                    email: email,
+                    password: hashedPass,
+                    things: []
+                }
+
+                self.collection('users').insert(doc, function(err, records){
+                    return callback(err, records);
+                });
+            }
+
+         });
+
     },
 
+    // Checks existance of a user with pecific email.
+    // @callback: function(exists)
+    checkIfExists: function(email, callback) {
+        this.collection('users').findOne({email: email}, function(err, document) {
+
+            if(document == null) {
+                var exists = false;
+                return callback(exists);
+            } else {
+                var exists = true;
+                return callback(exists);
+            }
+        });
+    },
+
+    logIn: function(email, password, callback) {
+
+        this.collection('users').findOne({email: email}, function(err, document){
+                if(document){
+                    bcrypt.compare(password, document.password, function(err, compare){
+                        callback(err, compare, document);
+                    });
+
+                }else{
+                    var err = "User not registered";
+                    callback(err, null, null);
+                }
+            });
+
+    },
+
+    // Register a new device in the users collection to which send notifications
     registerDevice: function(udid, name, user){
         /*
          * @TODO: Write method
@@ -23,6 +81,7 @@ var UserModel = model.extend({
          */
     },
 
+    // Sends a notification to user's devices telling a thing has been added
     notify: function(user, thingName){
         /*
          * @TODO: Write method
@@ -47,8 +106,14 @@ var UserModel = model.extend({
         this.collection('users').findOne({_id: ObjectID(id)}, callback);
     },
 
-    remove: function(id, callback) {
-        this.collection('users').findAndModify({_id: ObjectID(id)}, [], {}, {remove: true}, callback);
+    removeUser: function(email, callback) {
+        this.collection('users').remove({email: email}, function(err, count){
+            if(count == 1){
+                return callback(true);
+            }else {
+                return callback(false);
+            }
+        });
     }
 });
 module.exports = UserModel;

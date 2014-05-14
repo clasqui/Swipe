@@ -7,8 +7,8 @@ var BaseController = require('./Base');
 var View = require('../views/Base');
 var ObjectID = require('mongodb').ObjectID;
 var Auth = require('./auth');
-var User = new (require('../models/UserModel'));
-var Thing = new (require('../models/ThingModel'));
+var User = new (require('../models/UserModel'))();
+var Thing = new (require('../models/ThingModel'))();
 
 
 module.exports = BaseController.extend({
@@ -18,7 +18,7 @@ module.exports = BaseController.extend({
 	run: function(req, res, next){
 		if (Auth.check(req)){
 
-			cUser = req.session.user
+			var cUser = req.session.user
 			User.setDB(req.db);
 			Thing.setDB(req.db);
 
@@ -28,11 +28,14 @@ module.exports = BaseController.extend({
 
 				Thing.getFromUser(cUser, function(err, docs){
 
-					if(Thing.howMany(cUser) >= 10) {
+
+					if(docs.length >= 10) {
 						var max = true;
 					} else {
 						var max = false;
 					}
+
+					console.log(max);
 
 					req.session.save(function(){
 

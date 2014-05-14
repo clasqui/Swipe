@@ -8,5 +8,16 @@ module.exports = {
         req.session.swipe === true
     );
 
+	},
+
+	middleware: function(req, res, next) {
+		var value = this.check(req);
+
+		if(value) {
+			next()
+		} else {
+			res.redirect('/');
+		}
+
 	}
 };

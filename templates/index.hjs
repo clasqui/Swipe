@@ -14,10 +14,11 @@
     <div class="things">
     	<h2>Things</h2>
 
+    	<ul>
     	{{#things}}
-    		<b>{{name}}</b>: {{data}}<br>
+    		<li><b>{{name}}</b>: {{data}}&nbsp;&nbsp;<a href="/thing/{{_id}}">Open</a></li>
     	{{/things}}
-
+    	</ul>
 
     	{{^things}}
     		You don't have things.<br>
@@ -27,7 +28,16 @@
     		You have reached the limit of things.  Delete some to save new ones!
     	{{/max}}
     	{{^max}}
-   			<a href="#">Add thing</a>
+    		{{!Here goes the form for adding new things}}
+    		<p>
+    		<b>Add A thing</b>
+   			<form action="/thing" method="post">
+   				Name: <input type="text" name="title" /><br>
+   				Data: <input type="text" name="data" /><br>
+   				<input type="hidden" name="type" value="link" />
+   				<input type="submit" value="Add" />
+   			</form>
+   			</p>
     	{{/max}}
 
     </div>

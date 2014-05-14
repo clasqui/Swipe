@@ -30,7 +30,9 @@
     "less-middleware": "~0.1.15",
     "underscore": "1.6.0",
     "jasmine-node": "1.14.3",
-    "redis": "0.10.1"
+    "redis": "0.10.1",
+    "bcrypt-nodejs": "0.0.3",
+    "nodemailer": "^0.6.4"
   },
   "devDependencies": {
     "grunt": "^0.4.4",

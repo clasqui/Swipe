@@ -1,0 +1,15 @@
+<html>
+<head>
+	<title>Your thing: {{name}}</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+	<center>
+		<h1>{{name}}</h1>
+		<p>{{type}}:&nbsp;&nbsp;{{data}}</p>
+		<a href="/thing/{{id}}/delete">Delete</a> | <a href="#">Update</a> | <a href="/">Back</a>
+	</center>
+
+</body>
+</html>

@@ -14,6 +14,8 @@ var MongoClient = require('mongodb').MongoClient;
 var Index = require('./controllers/index');
 var Login = require('./controllers/login');
 var Logout = require('./controllers/logout');
+var Thing = require('./controllers/thing');
+var Signup = require('./controllers/signup');
 
 
 var app = express();
@@ -46,6 +48,7 @@ MongoClient.connect(config.mongodb, function(err, db){
 			next();
 		};
 
+		// Routes for the WEB App
 
 		app.all('/', attachDB, function(req, res, next){
 			Index.run(req, res, next);
@@ -57,8 +60,30 @@ MongoClient.connect(config.mongodb, function(err, db){
 		
 		app.all('/logout', function(req, res, next){
 			Logout.run(req, res, next);
-		})
+		});
 
+		app.post('/signup', attachDB, function(req, res, next){
+			Signup.run(req, res, next);
+		});
+
+		app.post('/thing', attachDB, function(req, res, next){
+			Thing.add(req, res, next);
+		});
+
+		app.get('/thing/:id', attachDB, function(req, res, next){
+			Thing.run(req, res, next);
+		});
+
+		app.get('/thing', function(req, res, next){
+			res.redirect('/');
+		});
+
+		// Routes for the API
+
+
+
+
+		//Server Initialization
 		http.createServer(app).listen(config.port, config.ip, function(){
   			console.log('Express server listening at ' + config.ip + ":" + config.port);
 		});

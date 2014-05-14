@@ -1,22 +1,22 @@
 var BaseController = require('./Base');
+var User = new(require('../models/UserModel'));
 
 module.exports = BaseController.extend({
-
 	name: 'Login',
 
 	run: function(req, res){
 		var post = req.body;
-		req.db.collection('users', function(err, collection){
+		
+		User.setDB(req.db);
 
-			collection.findOne({email: post.email, password: post.password}, function(err, document){
-				if(document){
-					req.session.swipe = true;
-					req.session.user = document._id;
-					res.redirect('/');
-				}else{
-					res.send('Bad user/pass');
-				}
-			});
+		User.logIn(post.email, post.password, function(err, compare, document){
+			if(compare) {
+				req.session.swipe = true;
+                req.session.user = document._id;
+                res.redirect('/');
+			} else {
+				res.send(err+"\nUsuari o contrassenya malament");
+			}
 
 		});
 

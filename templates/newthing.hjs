@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>New {{type}} Added</title>
+</head>
+<body>
+
+<center>
+	<h2>You have just added <b>{{name}}</b> with the data:</h2>
+	<p>
+		{{data}}
+	</p>
+</center>
+<a href="/">Go Back</a>
+
+</body>
+</html>
