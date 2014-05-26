@@ -52,7 +52,7 @@ module.exports = BaseController.extend({
 
 
 		} else {
-			res.redirect('/');
+			res.redirect('/?msg=notLogged');
 		}
 		
 
@@ -60,7 +60,15 @@ module.exports = BaseController.extend({
 	},
 
 	delete: function(req, res, next){
-		
+		Thing.setDB(req.db);
+		thingID = req.params.id;
+		Thing.remove(thingID, function(result){
+			if(result){
+				res.redirect('/?msg=deleted');
+			} else {
+				res.redirect('/?err=notDeleted')
+			}
+		});
 	},
 
 
@@ -113,7 +121,7 @@ module.exports = BaseController.extend({
 
 
 		} else {
-			res.redirect('/');
+			res.redirect('/?msg=notLogged');
 		}
 		
 

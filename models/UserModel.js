@@ -17,7 +17,8 @@ var UserModel = model.extend({
          this.checkIfExists(email, function(exists){
             console.log(email+"   "+password);
             if(exists) {
-                var err = "User already exists";
+                console.log("Exists");
+                var err = true;
                 return callback(err, null);
             } else {
                 
@@ -96,7 +97,8 @@ var UserModel = model.extend({
         this.collection('users').update({_id: ObjectID(id)}, query, {}, callback || function(){ });   
     },
 
-    /*  Not used actually, I only need a method for getting ONE user.
+    /*  
+    // Not used actually, I only need a method for getting ONE user.
     getlist: function(callback, query) {
         this.collection('users').find(query || {}).toArray(callback);
     },
@@ -108,6 +110,16 @@ var UserModel = model.extend({
 
     removeUser: function(email, callback) {
         this.collection('users').remove({email: email}, function(err, count){
+            if(count == 1){
+                return callback(true);
+            }else {
+                return callback(false);
+            }
+        });
+    },
+
+    removeUserWithId: function(id, callback) {
+        this.collection('users').remove({_id: ObjectID(id)}, function(err, count){
             if(count == 1){
                 return callback(true);
             }else {

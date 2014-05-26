@@ -1,23 +1,54 @@
+var Thing = new(require('../models/ThingModel.js'))();
+
 module.exports = {
 
 
 	check: function(req) {
-    return (
-        req.session && 
-        req.session.swipe && 
-        req.session.swipe === true
-    );
+    	return (
+        	req.session && 
+        	req.session.swipe && 
+        	req.session.swipe === true
+    	);
 
 	},
 
 	middleware: function(req, res, next) {
-		var value = this.check(req);
+		var value = (
+        	req.session && 
+        	req.session.swipe && 
+        	req.session.swipe === true
+    	);
 
 		if(value) {
-			next()
+			next();
 		} else {
-			res.redirect('/');
+			res.redirect('/?msg=notLogged');
 		}
 
+	},
+
+	owner: function(req, res, next) {
+		var thing = req.params.id;
+		var user = req.session.user;
+		Thing.setDB(req.db);
+		Thing.checkOwner(user, thing, function(result){
+			if(result){
+				next();
+			} else {
+				res.redirect('/?err=not_own');
+			}
+		});
+
+	},
+
+	/*
+	APIToken: function(req, res, next) {
+
+	},
+
+	userSession: function(req, res, next) {
+
 	}
+
+	*/
 };

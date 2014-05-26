@@ -19,8 +19,6 @@ var ThingModel = model.extend({
 		self.collection('things').insert(thingDoc, callback);
 
 
-
-
 	},
 	// Updates a thing.  Which thing: {id}, How to replace. {query}
 	update: function(query, id, callback) {
@@ -30,12 +28,44 @@ var ThingModel = model.extend({
 		this.collection('things').find(query || {}).toArray(callback);
 	},
 
+	getOne: function(id, callback) {
+		this.collection('things').findOne({_id: ObjectID(id)}, callback);
+	},
+
 	getFromUser: function(id, callback) {
 		this.collection('things').find({user: ObjectID(id)}).toArray(callback);
 	},
 
 	remove: function(id, callback) {
-		this.collection('things').findAndModify({_id: ObjectID(id)}, [], {}, {remove: true}, callback);
+		this.collection('things').remove({_id: ObjectID(id)}, function(err, count){
+			if(count == 1){
+				return callback(true);
+			}else{
+				return callback(false);
+			}
+		});
+	},
+
+	removeFromUser: function(userID, callback) {
+		this.collection('things').remove({user: ObjectID(userID)}, function(err, count){
+			if(count > 0){
+				return callback(true);
+			}else{
+				return callback(false);
+			}
+		});
+	},
+
+	checkOwner: function(user, thing, callback) {
+		this.getOne(thing, function(err, doc){
+			if(doc.user == user){
+				console.log("coincides");
+				callback(true);
+			} else {
+				 console.log("not from this user..");
+				 callback(false);
+			}
+		});
 	},
 
 

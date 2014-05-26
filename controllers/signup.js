@@ -12,16 +12,15 @@ module.exports = BaseController.extend({
 		User.setDB(req.db);
 		
 		if(post.su_email == undefined){
-			res.send('undefined');
+			res.redirect('/?err=no_email')
 		} else if(post.su_password == undefined){
-			res.send('undefined2');
+			res.redirect('/?err=no_password');
 		} else {
 			User.signUp(post.su_email, post.su_password, function(err, records){
 				if(err){
-					res.send(err);
-				}
-				if (records.length !== 1) {
-					res.send("Error inserting record");
+					res.redirect('/?msg=alreadyTaken');
+				} else if (records.length !== 1) {
+					res.redirect('/?err=notInserted');
 				} else {
 					// create reusable transport method (opens pool of SMTP connections)
 					/*
@@ -63,12 +62,12 @@ module.exports = BaseController.extend({
     				mail(mailOptions, function(error, response){
     					if(error){
         					console.log(error);
-        					res.send('Successfully registered');
+        					res.redirect('/?msg=registered');
     					}else{
-    						res.send('Successfully registered'),
+    						res.redirect('/?msg=registered');
         					console.log("Message sent: " + response.message);
     					}
-    					
+
     				});
 
 				}

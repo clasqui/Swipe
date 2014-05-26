@@ -16,6 +16,8 @@ var Login = require('./controllers/login');
 var Logout = require('./controllers/logout');
 var Thing = require('./controllers/thing');
 var Signup = require('./controllers/signup');
+var Auth = require('./controllers/auth');
+var Account = require('./controllers/user');
 
 
 var app = express();
@@ -70,17 +72,33 @@ MongoClient.connect(config.mongodb, function(err, db){
 			Thing.add(req, res, next);
 		});
 
-		app.get('/thing/:id', attachDB, function(req, res, next){
+		app.get('/thing/:id', attachDB, Auth.middleware, Auth.owner, function(req, res, next){
 			Thing.run(req, res, next);
+		});
+
+		app.get('/thing/:id/delete', attachDB, Auth.middleware, Auth.owner, function(req, res, next){
+			Thing.delete(req, res, next);
 		});
 
 		app.get('/thing', function(req, res, next){
 			res.redirect('/');
 		});
 
+		app.get('/account', attachDB, Auth.middleware, function(req, res, next){
+			Account.run(req, res, next);
+		});
+
+		app.get('/account/delete', attachDB, Auth.middleware, function(req, res, next){
+			Account.delete(req, res, next);
+		});
+
+
 		// Routes for the API
+		/*
+		app.get('/api/:token/authorize', Auth.APIToken, function(req, res, next) {
 
-
+		});
+		*/
 
 
 		//Server Initialization

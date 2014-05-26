@@ -1,0 +1,15 @@
+<html>
+<head>
+	<title>Your Account</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+	<center>
+		<h1>Your Account</h1>
+		<p>Email: {{email}}</p>
+		<a href="/account/delete">Delete</a> | <a href="/account/update">Update</a> | <a href="/">Back</a>
+	</center>
+
+</body>
+</html>

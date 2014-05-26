@@ -15,7 +15,10 @@ module.exports = BaseController.extend({
                 req.session.user = document._id;
                 res.redirect('/');
 			} else {
-				res.send(err+"\nUsuari o contrassenya malament");
+				if(err){
+					res.send(err);
+				}
+				res.redirect('/?msg=credentials');
 			}
 
 		});
