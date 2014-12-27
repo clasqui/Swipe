@@ -23,7 +23,7 @@ module.exports = BaseController.extend({
 					res.redirect('/?err=notInserted');
 				} else {
 					// create reusable transport method (opens pool of SMTP connections)
-					/*
+					
 					var smtpTransport = nodemailer.createTransport("SMTP",{
     					service: "Gmail",
     					auth: {
@@ -31,7 +31,7 @@ module.exports = BaseController.extend({
         					pass: "Marc112009GMAIL"
     					}
 					});
-					*/
+					
 
 					// setup e-mail data with unicode symbols
 					var mailOptions = {
@@ -42,7 +42,7 @@ module.exports = BaseController.extend({
     					html: "<h2>Welcome to swipe</h2><p>you can now <a href='localhost:3000/'>login</a></p>" // html body
 					}
 
-					/*
+					
 					// send mail with defined transport object
 					smtpTransport.sendMail(mailOptions, function(error, response){
     					if(error){
@@ -56,8 +56,8 @@ module.exports = BaseController.extend({
     					// if you don't want to use this transport object anymore, uncomment following line
     					smtpTransport.close(); // shut down the connection pool, no more messages
     				});
-    				*/
-
+    				
+					/*
     				var mail = nodemailer.mail;
     				mail(mailOptions, function(error, response){
     					if(error){
@@ -69,6 +69,8 @@ module.exports = BaseController.extend({
     					}
 
     				});
+
+    				*/
 
 				}
 			});

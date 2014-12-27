@@ -76,7 +76,7 @@ var UserModel = model.extend({
     registerDevice: function(udid, name, user){
         /*
          * @TODO: Write method
-         *  - Get the token and name for te new device
+         *  - Get the token and name for the new device
          *  - Insert them to database
          *  - Search for the user and put the data to the devices[] array
          */

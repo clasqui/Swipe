@@ -23,16 +23,19 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
-    "mongodb": "1.3.23",
-    "nodemon": "1.0.17",
+    "bcrypt-nodejs": "0.0.3",
     "express": "3.5.1",
     "hjs": "*",
-    "less-middleware": "~0.1.15",
-    "underscore": "1.6.0",
     "jasmine-node": "1.14.3",
+    "less": "^2.1.2",
+    "less-middleware": "~0.1.15",
+    "mkdirp": "^0.5.0",
+    "mongodb": "1.3.23",
+    "node.extend": "^1.1.3",
+    "nodemailer": "^0.6.4",
+    "nodemon": "1.0.17",
     "redis": "0.10.1",
-    "bcrypt-nodejs": "0.0.3",
-    "nodemailer": "^0.6.4"
+    "underscore": "1.6.0"
   },
   "devDependencies": {
     "grunt": "^0.4.4",
