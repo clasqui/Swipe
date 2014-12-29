@@ -17,7 +17,7 @@ var config = {
 		mode: 'production',
 		port: process.env.OPENSHIFT_NODEJS_PORT,
 		ip: process.env.OPENSHIFT_NODEJS_IP,
-		mongodb: "mongodb://" + process.env.OPENSHIFT_MONGODB_DB_URL+'/swipe'
+		mongodb: process.env.OPENSHIFT_MONGODB_DB_URL+'/swipe'
 	}
 }
 
