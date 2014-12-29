@@ -41,14 +41,18 @@ module.exports = {
 
 	},
 
-	/*
+	
 	APIToken: function(req, res, next) {
-
+		var token = req.params.token
+		if (token == "UBEC") {
+			next();
+		} else {
+			res.send("Bad token");
+		}
 	},
 
 	userSession: function(req, res, next) {
 
 	}
 
-	*/
 };

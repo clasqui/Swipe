@@ -95,15 +95,16 @@ MongoClient.connect(config.mongodb, function(err, db){
 
 
 		// Routes for the API
-		
+		/*
 		app.get('/api/:token/authorize', Auth.APIToken, function(req, res, next) {
 
 		});
-		
-		app.post('/api/:token/login', Auth.APIToken, attachDB, function(req, res, next) {
+		*/
+
+		app.post('/api/:token/login', Auth.APIToken, attachDB, function(req, res, next){
 			Login.run(req, res, next);
 			Account.loginFromDevice(req, res, next);
-		})
+		});
 
 
 		//Server Initialization

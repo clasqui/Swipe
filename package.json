@@ -9,14 +9,14 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "Marc Clascà",
+    "email": "hulehule20@gmail.com",
+    "url": "hulehule20.github.io"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://swipe-hulehule20.rhcloud.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/hulehule20/Swipe"
   },
   "engines": {
     "node": ">= 0.6.0",
