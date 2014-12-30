@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>New {{type}} Added</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
 

@@ -95,17 +95,20 @@ MongoClient.connect(config.mongodb, function(err, db){
 
 
 		// Routes for the API
-		/*
+		
 		app.get('/api/:token/authorize', Auth.APIToken, function(req, res, next) {
-
+			res.json(status: true, message: "Swipe API v1.0.0 beta");
 		});
-		*/
+		
 
 		app.post('/api/:token/login', Auth.APIToken, attachDB, function(req, res, next){
 			Login.run(req, res, next);
 			Account.loginFromDevice(req, res, next);
 		});
 
+		app.get('/api/:token/things', Auth.APIToken, Auth.middleware, attachDB, function(req, res, next) {
+			Thing.list(req, res, next);
+		})
 
 		//Server Initialization
 		http.createServer(app).listen(config.port, config.ip, function(){

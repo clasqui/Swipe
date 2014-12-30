@@ -126,6 +126,11 @@ module.exports = BaseController.extend({
 		
 
 		 
+	},
+
+	list: function(req, res, next) {
+		//List all the things from a user, mostly used by the API
+		
 	}
 
 });
