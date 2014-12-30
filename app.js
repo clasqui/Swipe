@@ -98,6 +98,7 @@ MongoClient.connect(config.mongodb, function(err, db){
 		
 		app.get('/api/:token/authorize', Auth.APIToken, function(req, res, next) {
 			res.json({status: true, message: "Swipe API v1.0.0 beta"});
+
 		});
 		
 
