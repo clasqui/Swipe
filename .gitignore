@@ -27,3 +27,6 @@ node_modules
 # Windows Start script with supervisor
 server.bat
 commands.bat
+
+#SIDA
+.DS_Store

@@ -43,11 +43,12 @@ module.exports = {
 
 	
 	APIToken: function(req, res, next) {
+		res.setHeader('Content-Type', 'application/json');
 		var token = req.params.token
 		if (token == "UBEC") {
 			next();
 		} else {
-			res.send("Bad token");
+			res.json({status: false, message: "Bad Token"});
 		}
 	},
 
