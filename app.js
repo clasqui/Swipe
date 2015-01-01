@@ -103,7 +103,7 @@ MongoClient.connect(config.mongodb, function(err, db){
 		
 
 		app.post('/api/:token/login', Auth.APIToken, attachDB, function(req, res, next){
-			Login.run(req, res, next);
+			Login.runAPI(req, res, next);
 			Account.loginFromDevice(req, res, next);
 		});
 
