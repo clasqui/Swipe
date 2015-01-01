@@ -39,7 +39,7 @@ module.exports = BaseController.extend({
 				if(err){
 					res.json({status: false, message: err});;
 				}
-				es.json({status: false, message: "Bad Credentials"});
+				res.json({status: false, message: "Bad Credentials"});
 			}
 
 		});
