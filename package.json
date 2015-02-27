@@ -30,12 +30,13 @@
     "less": "^2.1.2",
     "less-middleware": "~0.1.15",
     "mkdirp": "^0.5.0",
-    "mongodb": "1.3.23",
+    "mongodb": "*",
     "node.extend": "^1.1.3",
     "nodemailer": "^0.6.4",
     "nodemon": "1.0.17",
     "redis": "0.10.1",
-    "underscore": "1.6.0"
+    "underscore": "1.6.0",
+    "coffee-script": "*"
   },
   "devDependencies": {
     "grunt": "^0.4.4",

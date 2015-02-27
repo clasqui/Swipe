@@ -6,6 +6,13 @@ var config = {
 		mongodb: 'mongodb://127.0.0.1:27017/swipe'
 	},
 
+	test: {
+		mode: 'test',
+		port: 2000,
+		ip: '192.168.1.102',
+		mongodb: 'mongodb://127.0.0.1:27017/swipe'
+	},
+
 	staging: {
 		mode: 'staging',
 		port: 4000,

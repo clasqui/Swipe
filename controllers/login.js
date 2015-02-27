@@ -29,17 +29,33 @@ module.exports = BaseController.extend({
 		var post = req.body;
 		
 		User.setDB(req.db);
-
+		console.log("username: "+post.email+" password: "+post.password);
 		User.logIn(post.email, post.password, function(err, compare, document){
 			if(compare) {
-				req.session.swipe = true;
-                req.session.user = document._id;
-                res.json({status: true, message: "Logged In"});
+
+                userID = document._id;
+				deviceUDID = req.body.udid;
+				deviceName = req.body.devName;
+
+				User.registerDevice(deviceUDID, deviceName, userID);
+
+				User.createSession(userID, function(err, records) {
+					console.log(records.ops);
+					if(err) {
+						console.log(err);
+						res.json(500, {status: false, message: "Error creating session"});
+					} else {
+						res.json(200, {status: true, message: records.ops[0].session});					
+					}
+				});
+
 			} else {
 				if(err){
-					res.json({status: false, message: err});;
+					console.log(err);
+					res.json(500, {status: false, message: err});
 				}
-				res.json({status: false, message: "Bad Credentials"});
+				console.log("Bad Credentials");
+				res.json(200, {status: false, message: "Bad Credentials"});
 			}
 
 		});

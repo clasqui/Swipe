@@ -1,4 +1,6 @@
 var BaseController = require('./Base');
+var User = new(require('../models/UserModel.js'))();
+
 
 module.exports = BaseController.extend({
 
@@ -13,6 +15,24 @@ module.exports = BaseController.extend({
 			res.redirect('/');
 		}
 
+
+	},
+
+	runAPI: function(req, res){
+		User.setDB(req.db);
+
+		var session = req.body.session
+
+		User.deleteSession(session, function(result, err) {
+			if(err) {
+				res.json(500, {status: false, message: err});
+			}
+			if (result) {
+				res.json(200, {status: true, message: "Logged Out Successfully"});
+			} else {
+				res.json(400, {status: false, message: "No result"});
+			}
+		})
 
 	}
 

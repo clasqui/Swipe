@@ -1,4 +1,5 @@
 var Thing = new(require('../models/ThingModel.js'))();
+var User = new(require('../models/UserModel.js'))();
 
 module.exports = {
 
@@ -48,11 +49,27 @@ module.exports = {
 		if (token == "UBEC") {
 			next();
 		} else {
-			res.json({status: false, message: "Bad Token"});
+			res.json(403, {status: false, message: "Bad Token"});
 		}
 	},
 
 	userSession: function(req, res, next) {
+		User.setDB(req.db);
+		var session = req.body.session;
+		if (session == "" || session == null) {
+			res.json(401, {status: false, message: "Not Logged"});
+		}
+		console.log(session);
+		User.checkSession(session, function(status, user){
+			console.log(status);
+			if(status) {
+				req.session.user = user;
+				next();
+			} else {
+				res.json(401, {status: false, message: "Bad Session"});
+			}
+
+		});
 
 	}
 

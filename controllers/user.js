@@ -23,15 +23,6 @@ module.exports = BaseController.extend({
 		 
 	},
 
-	loginFromDevice: function(req, res, next) {
-		User.setDB(req.db);
-		userID = req.session.user;
-		deviceUDID = req.body.udid;
-		deviceName = req.body.devName;
-
-		User.registerDevice(deviceUDID, deviceName, userID);
-
-	},
 
 	delete: function(req, res, next) {
 		User.setDB(req.db);

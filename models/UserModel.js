@@ -1,7 +1,8 @@
 var Model = require("./Base"),
 	ObjectID = require('mongodb').ObjectID,
     bcrypt = require('bcrypt-nodejs'),
-    model = new Model();
+    model = new Model(),
+    sessionCreator = new require("./uuid"); 
 
 var UserModel = model.extend({
 	
@@ -72,6 +73,56 @@ var UserModel = model.extend({
 
     },
 
+    createSession: function(user, callback) {
+        var uuid = sessionCreator();
+        var doc = {
+                    session: uuid,
+                    user: user,
+                }
+        console.log(doc);
+
+        this.db.collection('sessions').insert(doc, function(err, records){
+            console.log(err);
+            if(err) {
+                console.log(err);
+            }
+            console.log("collection session insert");
+            callback(err, records);
+        });
+
+    },
+
+    deleteSession: function(userSession, callback) {
+        this.db.collection('sessions').remove({session: userSession}, function(err, result){
+            if (err) {
+                console.log(err);
+                callback(false, err)
+            }
+            if (result.result.n == 1) {
+                console.log("ok");
+                callback(true, null);
+            } else {
+                callback(false, null);
+            }
+        });
+
+    },
+
+    checkSession: function(userSession, callback) {
+        this.db.collection('sessions').findOne({session: userSession}, function(err, document){
+            console.log(err);
+            if(document) {
+                console.log(document);
+                callback(true, document.user);
+            } else {
+                callback(false, null);
+            }
+
+        });
+    },
+
+
+
     // Register a new device in the users collection to which send notifications
     registerDevice: function(udid, name, user){
         /*
@@ -80,6 +131,8 @@ var UserModel = model.extend({
          *  - Insert them to database
          *  - Search for the user and put the data to the devices[] array
          */
+
+         console.log("udid: "+udid);
     },
 
     // Sends a notification to user's devices telling a thing has been added

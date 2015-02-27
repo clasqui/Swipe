@@ -23,8 +23,8 @@ module.exports = BaseController.extend({
 					res.redirect('/?err=notInserted');
 				} else {
 					// create reusable transport method (opens pool of SMTP connections)
-					
-					var smtpTransport = nodemailer.createTransport("SMTP",{
+					/*
+					var smtpTransport = nodemailer.createTransport({
     					service: "Gmail",
     					auth: {
         					user: "hulehule20@gmail.com",
@@ -57,7 +57,7 @@ module.exports = BaseController.extend({
     					smtpTransport.close(); // shut down the connection pool, no more messages
     				});
     				
-					/*
+					
     				var mail = nodemailer.mail;
     				mail(mailOptions, function(error, response){
     					if(error){
@@ -71,6 +71,8 @@ module.exports = BaseController.extend({
     				});
 
     				*/
+
+    				res.send("Successfully registered");
 
 				}
 			});
