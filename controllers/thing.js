@@ -128,8 +128,22 @@ module.exports = BaseController.extend({
 		 
 	},
 
-	list: function(req, res, next) {
+	listAPI: function(req, res, next) {
 		//List all the things from a user, mostly used by the API
+
+		var cUser = req.session.user;
+		Thing.getFromUser(cUser, function(err, docs){
+			if(err) {
+				res.json(500, {status: false, message:err});
+			}
+			console.log(docs);
+			if(docs.length == 0) {
+				res.json(200, {status: true, message: []});
+			}
+			
+			res.json(200, {status: true, message: docs});
+
+		});
 		
 	}
 

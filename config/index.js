@@ -9,7 +9,7 @@ var config = {
 	test: {
 		mode: 'test',
 		port: 2000,
-		ip: '192.168.1.102',
+		ip: '192.168.1.103',
 		mongodb: 'mongodb://127.0.0.1:27017/swipe'
 	},
 

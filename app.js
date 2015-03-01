@@ -117,7 +117,7 @@ MongoClient.connect(config.mongodb, function(err, db){
 		});
 
 		app.post('/api/:token/things', attachDB, Auth.APIToken, Auth.userSession, function(req, res, next) {
-			Thing.list(req, res, next);
+			Thing.listAPI(req, res, next);
 		});
 
 		//Server Initialization
