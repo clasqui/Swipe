@@ -4,10 +4,10 @@ var Model = require("./Base"),
 
 var ThingModel = model.extend({
 	// Inserts a new thing
-	addThing: function(title, data, type, user, callback) {
+	addThing: function(created, data, type, user, callback) {
 
 		thingDoc = {
-			name: title,
+			created: created,
 			data: data,
 			type: type,
 			user: ObjectID(user)
@@ -71,7 +71,7 @@ var ThingModel = model.extend({
 
 	content: {
 		user: "",
-		name: "",
+		created: "",
 		data: "",
 		id: ""
 	}

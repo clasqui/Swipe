@@ -28,7 +28,9 @@ module.exports = BaseController.extend({
 				res.json(500, {status: false, message: err});
 			}
 			if (result) {
+				User.removeDevice(req.body.device, req.session.user);
 				res.json(200, {status: true, message: "Logged Out Successfully"});
+
 			} else {
 				res.json(400, {status: false, message: "No result"});
 			}

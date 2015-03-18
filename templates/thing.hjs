@@ -1,13 +1,13 @@
 <html>
 <head>
-	<title>Your thing: {{name}}</title>
+	<title>Your {{type}}</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
 
 	<center>
-		<h1>{{name}}</h1>
-		<p>{{type}}:&nbsp;&nbsp;{{data}}</p>
+		<p>{{data}}<br>
+			Created: {{created}}</p>
 		<a href="/thing/{{id}}/delete">Delete</a> | <a href="/thing/{{id}}/update">Update</a> | <a href="/">Back</a>
 	</center>
 

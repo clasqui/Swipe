@@ -25,17 +25,17 @@ module.exports = BaseController.extend({
 					res.send('You have reached the limit of things.  Delete some.');
 				} else {
 
-					Thing.addThing(post.title, post.data, post.type, cUser, function(err, records){
+					Thing.addThing(new Date(), post.data, post.type, cUser, function(err, records){
 						if(err){
 							throw err;
 						}
 
-						var newThing = records[0];
+						var newThing = records.ops[0];
 
 
 						var v = new View(res, 'newthing');
 						v.render({
-							name: newThing.name,
+							created: newThing.created,
 							data: newThing.data,
 							type: newThing.type
 
@@ -99,7 +99,7 @@ module.exports = BaseController.extend({
 
 						var v = new View(res, 'thing');
 						v.render({
-							name: docs[0].name,
+							created: docs[0].created,
 							type: docs[0].type,
 							data: docs[0].data,
 							id: docs[0]._id
@@ -130,7 +130,7 @@ module.exports = BaseController.extend({
 
 	listAPI: function(req, res, next) {
 		//List all the things from a user, mostly used by the API
-
+		Thing.setDB(req.db);
 		var cUser = req.session.user;
 		Thing.getFromUser(cUser, function(err, docs){
 			if(err) {
@@ -138,7 +138,7 @@ module.exports = BaseController.extend({
 			}
 			console.log(docs);
 			if(docs.length == 0) {
-				res.json(200, {status: true, message: []});
+				res.json(200, {status: true, message: null});
 			}
 			
 			res.json(200, {status: true, message: docs});

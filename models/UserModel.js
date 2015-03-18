@@ -4,6 +4,8 @@ var Model = require("./Base"),
     model = new Model(),
     sessionCreator = new require("./uuid"); 
 
+var apns = require("apns");
+
 var UserModel = model.extend({
 	
     // Signs a new user up
@@ -124,7 +126,7 @@ var UserModel = model.extend({
 
 
     // Register a new device in the users collection to which send notifications
-    registerDevice: function(udid, name, user){
+    registerDevice: function(udid, name, user, callback){
         /*
          * @TODO: Write method
          *  - Get the token and name for the new device
@@ -132,17 +134,80 @@ var UserModel = model.extend({
          *  - Search for the user and put the data to the devices[] array
          */
 
+         var self = this
+         this.collection('users').findOne({_id: ObjectID(user)}, function(err, document) {
+            var cDevices = document.devices;
+
+            for (var index in cDevices) {
+                if (name == cDevices[index][0]) {
+                    cDevices[index][1] = udid;
+                    self.collection('user').update({_id: ObjectID(user)}, {$set: {devices: cDevices}}, callback);
+                    return
+                }
+            }
+
+            cDevices.push([name, udid]);
+            self.collection('user').update({_id: ObjectID(user)}, {$set: {devices: cDevices}}, callback);
+
+         });
+
          console.log("udid: "+udid);
     },
 
+    removeDevice: function(name, user) {
+
+        console.log(user);
+        var self = this
+         this.collection('users').findOne({_id: ObjectID(user)}, function(err, document) {
+            var cDevices = document.devices;
+
+            for (var index in cDevices) {
+                if (name == cDevices[index][0]) {
+                    cDevices.splice(index, 1);
+                }
+            }
+            self.collection('user').update({_id: ObjectID(user)}, {$set: {devices: cDevices}}, callback);
+            return
+
+         });
+
+    },
+
     // Sends a notification to user's devices telling a thing has been added
-    notify: function(user, thingName){
+    notify: function(user, thingName, thingType){
         /*
          * @TODO: Write method
          *  - Get the user's devices and tokens
          *  - Connect to redis database
          *  - Set a new entry with the push notification
          */
+
+         this.collection('users').findOne({_id: ObjectID(user)}, function(err, document) {
+            var cDevices = document.devices;
+
+            options = {
+                keyFile : "conf/key.pem",
+                certFile : "conf/cert.pem",
+                debug : true
+            };
+
+            connection = new apns.Connection(options);
+            notification = new apns.Notification();
+            notification.alert = "New "+thingType+" added";
+            notification.payload = {"data" : thingName, "type" : thingType};
+            notification.badge = 1;
+
+            for (var index in cDevices) {
+                udid = cDevices[index][1]
+                notification.device = new apns.Device(udid);
+                connection.sendNotification(notification);
+            }
+
+
+         });
+
+        
+
     },
 
     // Updates a thing.  Which thing: {id}, How to replace. {query}

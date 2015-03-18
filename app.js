@@ -106,7 +106,13 @@ MongoClient.connect(config.mongodb, function(err, db){
 			Login.runAPI(req, res, next);
 		});
 
-		app.post('/api/:token/logout', Auth.APIToken, attachDB, function(req, res, next){
+		app.post('/api/:token/registerDevice', Auth.APIToken, attachDB, Auth.userSession, function(req, res, next) {
+
+			Login.device(req, res);
+
+		});
+
+		app.post('/api/:token/logout', Auth.APIToken, attachDB, Auth.userSession, function(req, res, next){
 			Logout.runAPI(req, res, next);
 		});
 

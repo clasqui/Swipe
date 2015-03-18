@@ -33,12 +33,7 @@ module.exports = BaseController.extend({
 		User.logIn(post.email, post.password, function(err, compare, document){
 			if(compare) {
 
-                userID = document._id;
-				deviceUDID = req.body.udid;
-				deviceName = req.body.devName;
-
-				User.registerDevice(deviceUDID, deviceName, userID);
-
+				userID = document._id
 				User.createSession(userID, function(err, records) {
 					console.log(records.ops);
 					if(err) {
@@ -59,6 +54,25 @@ module.exports = BaseController.extend({
 			}
 
 		});
+
+	},
+
+	device: function(req, res) {
+		var post = req.body;
+		User.setDB(req.db);
+		
+		deviceUDID = req.body.udid;
+		deviceName = req.body.name;
+		userID = req.session.user
+
+		User.registerDevice(deviceUDID, deviceName, userID, function(err, count, status) {
+			if(err) {
+				res.json(500, {status: false, message: err});
+			}
+
+			res.json(200, {status: true, message:count});
+		});
+
 
 	}
 

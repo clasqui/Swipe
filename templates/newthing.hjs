@@ -6,7 +6,7 @@
 <body>
 
 <center>
-	<h2>You have just added <b>{{name}}</b> with the data:</h2>
+	<h2>You have just added:</h2>
 	<p>
 		{{data}}
 	</p>

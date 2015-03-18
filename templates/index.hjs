@@ -17,7 +17,7 @@
 
     	<ul>
     	{{#things}}
-    		<li><b>{{name}}</b>: {{data}}&nbsp;&nbsp;<a href="/thing/{{_id}}">Open</a></li>
+    		<li>{{data}}&nbsp;&nbsp;<a href="/thing/{{_id}}">Open</a></li>
     	{{/things}}
     	</ul>
 
@@ -33,9 +33,11 @@
     		<p>
     		<b>Add A thing</b>
    			<form action="/thing" method="post">
-   				Name: <input type="text" name="title" /><br>
-   				Data: <input type="text" name="data" /><br>
-   				<input type="hidden" name="type" value="link" />
+   				<select name="type">
+            <option value="link">Link</option>
+            <option value="note">Note</option>
+          </select>
+          &nbsp;&nbsp; <input required type="text" name="data" /><br>
    				<input type="submit" value="Add" />
    			</form>
    			</p>
